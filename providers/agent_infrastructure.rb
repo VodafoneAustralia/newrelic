@@ -67,13 +67,14 @@ def linux_service_provider
   service_provider = Chef::Provider::Service::Systemd
 
   # upstart workaround(s)
+  #updated for Amazon Linux older versions
   case node['platform_family']
   when 'amazon'
     if node['platform_version'].to_i == 1
       service_provider = Chef::Provider::Service::Upstart
     end
   when 'rhel'
-    if node['platform_version'] =~ /^6/
+    if node['platform_version'] =~ /^6/ or node['platform'] == 'amazon'
       service_provider = Chef::Provider::Service::Upstart
     end
   when 'ubuntu'
