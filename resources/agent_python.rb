@@ -8,7 +8,7 @@
 actions :install, :remove
 default_action :install
 
-attribute :license, :kind_of => String, :required => true, :default => NewRelic.application_monitoring_license(node)
+attribute :license, :kind_of => String, :required => true, :default => lazy { NewRelic.application_monitoring_license(node) }
 attribute :version, :kind_of => String, :default => nil
 attribute :virtualenv, :kind_of => String, :default => nil
 attribute :config_file, :kind_of => String, :default => '/etc/newrelic/newrelic.ini'
@@ -31,6 +31,8 @@ attribute :transaction_tracer_explain_threshold, :kind_of => String, :default =>
 attribute :thread_profiler_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :error_collector_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :error_collector_ignore_errors, :kind_of => String, :default => ' '
+attribute :error_collector_ignore_classes, :kind_of => Array, :default => nil
 attribute :browser_monitoring_auto_instrument, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :cross_application_tracer_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :feature_flag, :kind_of => String, :default => nil
+attribute :python, :kind_of => String, :default => nil
